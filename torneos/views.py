@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from jugadores.models import Jugador
-from videojuegos.models import VideoJuego
+from videojuegos.models import Videojuego
 from .models import Torneo, Inscripcion
 from .serializers import TorneoSerializer, InscripcionSerializer
 

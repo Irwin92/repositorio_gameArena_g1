@@ -3,14 +3,14 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import VideoJuego
+from .models import Videojuego
 from .serializers import VideoJuegoSerializer
 
 @api_view(['GET','POST'])
 def videojuegos_api(request):
     if request.method == 'GET':
-        videojuegos = VideoJuego.objects.filter(activo=True).order_by('nombre')
-        plataforma = request.query_params_get('plataforma')
+        videojuegos = Videojuego.objects.filter(activo=True).order_by('nombre')
+        plataforma = request.query_params.get('plataforma')
 
         if plataforma:
             videojuegos =videojuegos.filter(plataforma__iexact=plataforma)
@@ -34,8 +34,8 @@ def videojuegos_api(request):
 @api_view(['GET','PUT','PATCH','DELETE'])
 def videojuego_detalle_api(request, id):
     try:
-        videojuego= VideoJuego.objects.get(id=id) 
-    except VideoJuego.DoesNotExist:
+        videojuego= Videojuego.objects.get(id=id) 
+    except Videojuego.DoesNotExist:
         return Response(
             {'error':'Videojuego no enconcontrado.'},
             status=status.HTTP_404_NOT_FOUND
